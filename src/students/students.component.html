@@ -1,0 +1,56 @@
+
+<div class="d-flex justify-content-between align-items-center wh-100 container">
+
+  <div class="m-3 col-sm-6 ">
+
+    <select class="form-select form-select-lg bg-light " [(ngModel)]="selectedStudentId" >
+
+      <option *ngFor="let student of (students$ | async ) " [value]="student.id">{{student.department}}</option>
+    </select>
+  </div>
+
+  <div class="m-3 gap-2 d-flex justify-contnet-center">
+    <input type="search" class="p-1" placeholder= 'search name' #name >
+    <button class="btn btn-outline-success" (click)="searchName(name.value)" >search</button>
+  </div>
+</div>
+
+
+
+<table
+  class="table text-center my-5 table-striped table-hover shadow rounded p-5 container"
+>
+
+
+
+  <thead class="table-dark">
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Department</th>
+      <th>GPA</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let student of (students$ | async )" [class.d-none]="(searchedName && !student.name.toLowerCase().includes(searchedName.toLowerCase())) ||
+                   (selectedStudentId && selectedStudentId != 0 && student.id != selectedStudentId)">
+      <td>{{ student.id }}</td>
+      <td>{{ student.name}}</td>
+      <td>{{ student.age }}</td>
+      <td>{{ student.department }}</td>
+      <td>{{ student.gpa }}</td>
+      <td class="d-flex gap-2 justify-content-center">
+        <button class="btn btn-success" (click)="navigateToDetails(student.id)">
+          <i class="fa-solid fa-folder-open"></i>
+        </button>
+
+        <button class="btn btn-danger" (click)="deleteStudent(student.id)">
+          <i class="fa-regular fa-trash-can"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

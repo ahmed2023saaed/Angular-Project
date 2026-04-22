@@ -1,0 +1,166 @@
+<!-- <app-students ></app-students> -->
+<!--
+<div class="bg-light  p-5">
+  <div class="container d-flex gap-5 pb-5">
+    <div class="image w-25">
+      <img class="w-100" src="/studentPic.webp" />
+    </div>
+
+    <div class="data bg-white w-75  p-5 d-flex">
+
+      <div class="d1 w-50">
+        <p>Id: {{ studentData?.id }}</p>
+        <p>First Name: {{ studentData?.firstName }}</p>
+        <p>Last Name: {{ studentData?.lastName }}</p>
+        <p>Age: {{ studentData?.age }}</p>
+        <p>Gender: {{ studentData?.gender }}</p>
+        <p>Email: {{ studentData?.email }}</p>
+        <p>Phone: {{ studentData?.phone }}</p>
+        <p>Address: {{ studentData?.address }}</p>
+      </div>
+
+      <div class="d1 w-50">
+        <p>City: {{ studentData?.city }}</p>
+        <p>Country: {{ studentData?.country }}</p>
+        <p>Department: {{ studentData?.department }}</p>
+        <p>Level: {{ studentData?.level }}</p>
+        <p>GPA: {{ studentData?.gpa }}</p>
+        <p>Enrollment Date: {{ studentData?.enrollmentDate }}</p>
+        <p>Is Active: {{ studentData?.isActive }}</p>
+      </div>
+
+    </div>
+  </div>
+</div> -->
+
+
+
+<!--
+
+<div class="container mt-5" *ngIf=" studentData$ | async as student ">
+  <div class="card shadow-lg border-2 rounded-4 overflow-hidden">
+
+    <div class="row g-0">
+
+      <div class="col-md-4 bg-primary text-white text-center d-flex flex-column justify-content-center align-items-center p-4">
+
+        <img
+          src="/studentPic.webp"
+          class="rounded-circle border border-4 border-white shadow mb-3"
+          width="140"
+          height="140"
+          alt="Student Image"
+        >
+
+        <h4 class="fw-bold">
+          {{ student?.firstName }} {{student?.lastName }}
+        </h4>
+
+        <p class="mb-1">{{ student?.department }}</p>
+
+        <span
+          class="badge mt-2"
+          [ngClass]="student?.isActive ? 'bg-success' : 'bg-danger'">
+          {{ student?.isActive ? 'Active' : 'Inactive' }}
+        </span>
+
+      </div>
+
+      <div class="col-md-8 p-4">
+
+        <div class="row">
+
+          <div class="col-md-6 mb-3">
+            <p><strong>ID:</strong> {{ student?.id }}</p>
+            <p><strong>Age:</strong> {{ student?.age }}</p>
+            <p><strong>Gender:</strong> {{ student?.gender }}</p>
+            <p><strong>Email:</strong> {{ student?.email }}</p>
+            <p><strong>Phone:</strong> {{ student?.phone }}</p>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <p><strong>Address:</strong> {{ student?.address }}</p>
+            <p><strong>City:</strong> {{student?.city }}</p>
+            <p><strong>Country:</strong> {{ student?.country }}</p>
+            <p><strong>Level:</strong> {{ student?.level }}</p>
+
+            <p>
+              <strong>GPA:</strong>
+              <span class="badge bg-success">
+                {{ student?.gpa }}
+              </span>
+            </p>
+
+            <p>
+              <strong>Enrollment:</strong>
+              {{ student?.enrollmentDate | date }}
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div> -->
+
+
+
+
+
+
+
+
+
+
+<div class="container mt-5" *ngIf="studentData$ | async as student; else notFound">
+  <div class="card shadow-lg border-2 rounded-4 overflow-hidden">
+    <div class="row g-0">
+
+      <!-- Left Panel -->
+      <div class="col-md-4 bg-primary text-white text-center d-flex flex-column justify-content-center align-items-center p-4">
+        <img
+          src="/studentPic.webp"
+          class="rounded-circle border border-4 border-white shadow mb-3"
+          width="140" height="140" alt="Student Image">
+
+        <h4 class="fw-bold">{{ student.firstName }} {{ student.lastName }}</h4>
+        <p class="mb-1">{{ student.department }}</p>
+
+        <span class="badge mt-2" [ngClass]="student.isActive ? 'bg-success' : 'bg-danger'">
+          {{ student.isActive ? 'Active' : 'Inactive' }}
+        </span>
+      </div>
+
+      <!-- Right Panel -->
+      <div class="col-md-8 p-4">
+        <div class="row">
+
+          <div class="col-md-6 mb-3">
+            <p><strong>ID:</strong> {{ student.id }}</p>
+            <p><strong>Age:</strong> {{ student.age }}</p>
+            <p><strong>Gender:</strong> {{ student.gender }}</p>
+            <p><strong>Email:</strong> {{ student.email }}</p>
+            <p><strong>Phone:</strong> {{ student.phone }}</p>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <p><strong>Address:</strong> {{ student.address }}</p>
+            <p><strong>City:</strong> {{ student.city }}</p>
+            <p><strong>Country:</strong> {{ student.country }}</p>
+            <p><strong>Level:</strong> {{ student.level }}</p>
+            <p><strong>GPA:</strong> <span class="badge bg-success">{{ student.gpa }}</span></p>
+            <p><strong>Enrollment:</strong> {{ student.enrollmentDate | date }}</p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<ng-template #notFound>
+  <p class="text-center text-danger mt-5">Student not found. ID: {{ id }}</p>
+</ng-template>
